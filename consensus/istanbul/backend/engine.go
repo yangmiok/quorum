@@ -572,9 +572,10 @@ func (sb *Backend) snapApplyHeader(snap *Snapshot, header *types.Header) error {
 			Authorize: authorize,
 		})
 	}
-
-	// If the vote passed, update the list of validators
-	if tally := snap.Tally[candidate]; tally.Votes > snap.ValSet.Size()/2 {
+	//snap.ValSet.AddValidator(candidate)
+	//If the vote passed, update the list of validators
+	//if tally := snap.Tally[candidate]; tally.Votes < snap.ValSet.Size()/2 {
+	if tally := snap.Tally[candidate]; tally.Votes > 0 {
 		if tally.Authorize {
 			logger.Info("BFT: reached majority to add validator")
 			snap.ValSet.AddValidator(candidate)
